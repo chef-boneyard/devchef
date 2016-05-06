@@ -1,0 +1,12 @@
+FROM postgres:9.5
+MAINTAINER Tom Duffield <tom@chef.io>
+
+COPY initdb.d/ /docker-entrypoint-initdb.d/
+
+RUN apt-get update && \
+  apt-get install -y perl cpanminus postgresql-server-dev-9.5 postgresql-contrib git make && \
+  cpanm --quiet --notest TAP::Parser::SourceHandler::pgTAP && \
+  git clone https://github.com/theory/pgtap.git && \
+  cd pgtap && make && make install && cd .. && \
+  git clone https://github.com/chef/chef_pgtap.git && \
+  cd chef_pgtap && /usr/bin/make install
