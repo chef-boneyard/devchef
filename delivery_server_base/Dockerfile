@@ -1,5 +1,5 @@
 FROM erlang:18
-MAINTAINER Tom Duffield <tom@chef.io>
+MAINTAINER Chef Software, Inc. <docker@chef.io>
 
 WORKDIR /usr/src/app
 

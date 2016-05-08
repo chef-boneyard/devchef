@@ -1,5 +1,5 @@
 FROM node:5.6.0
-MAINTAINER Tom Duffied <tom@chef.io>
+MAINTAINER Chef Software, Inc. <docker@chef.io>
 
 RUN mkdir -p /usr/src/app
 

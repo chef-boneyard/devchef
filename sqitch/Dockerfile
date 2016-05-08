@@ -1,4 +1,4 @@
 FROM matteofigus/docker-sqitch
-MAINTAINER Tom Duffield <tom@chef.io>
+MAINTAINER Chef Software, Inc. <docker@chef.io>
 
 COPY ./wait-for-it.sh /wait-for-it.sh

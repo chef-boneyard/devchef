@@ -1,5 +1,5 @@
 FROM devchef/delivery_web_base
-MAINTAINER Tom Duffied <tom@chef.io>
+MAINTAINER Chef Software, Inc. <docker@chef.io>
 
 ENV DISPLAY :99
 ENV CHROME_BIN /usr/bin/google-chrome

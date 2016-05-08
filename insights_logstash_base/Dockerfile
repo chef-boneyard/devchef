@@ -1,5 +1,5 @@
 FROM logstash:2.3.1
-MAINTAINER Tom Duffield <tom@chef.io>
+MAINTAINER Chef Software, Inc. <docker@chef.io>
 
 RUN logstash-plugin install --development
 RUN logstash-plugin install --no-verify uuidtools
