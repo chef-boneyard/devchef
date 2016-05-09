@@ -1,23 +1,14 @@
 .PHONY: all build-all push-all
 all: build-all push-all
-build-all: erlang-18-build logstash-2.3-build node-5.6-build postgres-9.5-build sqitch-build
-push-all: erlang-18-push logstash-2.3-push node-5.6-push postgres-9.5-push sqitch-push
+build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build
+push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push
 
 .PHONY: erlang-18-build erlang-18-push
 erlang-18-build:
 	docker build -t devchef/erlang-18:latest -f erlang-18/Dockerfile erlang-18
-	docker build -t devchef/erlang-18:delivery -f erlang-18/Dockerfile-Delivery erlang-18
 
 erlang-18-push:
 	docker push devchef/erlang-18
-
-.PHONY: logstash-2.3-build logstash-2.3-push
-logstash-2.3-build:
-	docker build -t devchef/logstash-2.3:latest -f logstash-2.3/Dockerfile logstash-2.3
-	docker build -t devchef/logstash-2.3:insights -f logstash-2.3/Dockerfile-Insights logstash-2.3
-
-logstash-2.3-push:
-	docker push devchef/logstash-2.3
 
 .PHONY: postgres-9.5-build postgres-9.5-push
 postgres-9.5-build:
