@@ -1,7 +1,7 @@
 .PHONY: all build-all push-all
 all: build-all push-all
-build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build
-push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push
+build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build
+push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push
 
 .PHONY: erlang-18-build erlang-18-push
 erlang-18-build:
@@ -24,6 +24,13 @@ sqitch-build:
 
 sqitch-push:
 	docker push devchef/sqitch
+
+.PHONY: chef-server-12-build chef-server-12-push
+chef-server-12-build:
+	docker build -t devchef/chef-server-12:latest -f chef-server-12/Dockerfile chef-server-12
+
+chef-server-12-push:
+	docker push devchef/chef-server-12
 
 .PHONY: node-5.6-build node-5.6-push
 node-5.6-build:
