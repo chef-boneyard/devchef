@@ -17,7 +17,6 @@ pid=$!
 sleep 1
 
 chef-server-ctl reconfigure
-opscode-push-jobs-server-ctl reconfigure
 
 mkdir /keys
 chef-server-ctl user-create $CHEF_USER $CHEF_NAME $CHEF_EMAIL $CHEF_PASS --filename /keys/$CHEF_USER.pem
