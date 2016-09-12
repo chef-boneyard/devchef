@@ -1,4 +1,5 @@
 FROM ubuntu:14.04
+MAINTAINER Chef Software <docker@chef.io>
 
 ENV	DEBIAN_FRONTEND noninteractive
 ENV CHEF_SERVER_VERSION 12.8.0
