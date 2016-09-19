@@ -42,7 +42,7 @@ node-5.6-push:
 
 .PHONY: chefdk-build chefdk-push
 chefdk-build:
-	docker build --build-arg CHEFDK_VERSION=0.18.7 --build-arg CHANNEL=current -t devchef/chefdk:latest -f chefdk/Dockerfile chefdk
+	docker build --build-arg CHANNEL=current -t devchef/chefdk:latest -t devchef/chefdk:current -f chefdk/Dockerfile chefdk
 	docker build -t devchef/chefdk:stable -f chefdk/Dockerfile chefdk
 
 chefdk-push:
