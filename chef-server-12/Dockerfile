@@ -1,9 +1,12 @@
-FROM ubuntu:14.04
+FROM devchef/chefdk:stable
 MAINTAINER Chef Software <docker@chef.io>
 
 ENV	DEBIAN_FRONTEND noninteractive
-ENV CHEF_SERVER_VERSION 12.8.0
 
+ARG CHEF_CHANNEL
+
+ENV CHEF_CHANNEL ${CHEF_CHANNEL:-stable}
+ENV CHEF_FQDN chef-server
 ENV CHEF_USER super
 ENV CHEF_NAME Super User
 ENV CHEF_PASS password
@@ -13,15 +16,10 @@ ENV CHEF_ORG_FULL Local Development
 
 VOLUME /volumes/keys
 
-COPY setup.sh run.sh /usr/local/bin/
+COPY setup.rb install.rb run.sh /
 
-RUN apt-get update && apt-get install -y wget curl && \
-    wget --content-disposition https://chef.bintray.com/stable-apt/ubuntu/14.04/chef-server-core_$CHEF_SERVER_VERSION-1_amd64.deb && \
-    dpkg -i chef-server*.deb && \
-    /usr/local/bin/setup.sh && \
-    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* chef-server*.deb
+RUN chef-apply install.rb
 
 EXPOSE 443
 
-
-CMD ["/usr/local/bin/run.sh"]
+CMD ["bash", "-c", "/run.sh"]

@@ -16,6 +16,5 @@ services:
 ```
 
 ## Extracting Keys
-Important keys should be placed in the `/keys` folder. On start, the contents of
-`/keys` is copied to `/volumes/keys`, which is a volume that can be mounted on
-other devices which may require access to them (i.e. Chef Manage).
+Important keys are placed in the `/volumes/keys` volume. You can mount this
+volume to your host or to another container.
