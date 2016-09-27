@@ -1,7 +1,7 @@
 .PHONY: all build-all push-all
 all: build-all push-all
-build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build
-push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push
+build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build
+push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push
 
 .PHONY: erlang-18-build erlang-18-push
 erlang-18-build:
@@ -47,3 +47,11 @@ chefdk-build:
 
 chefdk-push:
 	docker push devchef/chefdk
+
+.PHONY: sshd-build sshd-push
+sshd-build:
+	docker build -t devchef/sshd:centos -f sshd/Dockerfile.centos sshd
+	docker build -t devchef/sshd:ubuntu -f sshd/Dockerfile.ubuntu sshd
+
+sshd-push:
+	docker push devchef/sshd
