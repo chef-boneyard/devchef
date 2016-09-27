@@ -14,7 +14,7 @@ execute 'create user' do
 chef-server-ctl user-create #{ENV['CHEF_USER']} #{ENV['CHEF_NAME']} \
   #{ENV['CHEF_EMAIL']} #{ENV['CHEF_PASS']} --filename /volumes/keys/#{ENV['CHEF_USER']}.pem
   EOH
-  creates "/volumes/keys/$CHEF_USER.pem"
+  creates "/volumes/keys/#{ENV['CHEF_USER']}.pem"
 end
 
 execute 'create org' do
