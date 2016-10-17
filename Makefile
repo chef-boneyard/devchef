@@ -1,7 +1,7 @@
 .PHONY: all build-all push-all
 all: build-all push-all
-build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build
-push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push
+build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build omnibus-toolchain-build
+push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push omnibus-toolchain-push
 
 .PHONY: erlang-18-build erlang-18-push
 erlang-18-build:
@@ -55,3 +55,11 @@ sshd-build:
 
 sshd-push:
 	docker push devchef/sshd
+
+.PHONY: omnibus-toolchain-build omnibus-toolchain-push
+omnibus-toolchain-build:
+	docker build --build-arg CHANNEL=current -t devchef/omnibus-toolchain:latest -t devchef/omnibus-toolchain:current -f omnibus-toolchain/Dockerfile omnibus-toolchain
+	docker build -t devchef/omnibus-toolchain:stable -f omnibus-toolchain/Dockerfile omnibus-toolchain
+
+omnibus-toolchain-push:
+	docker push devchef/omnibus-toolchain
