@@ -51,7 +51,8 @@ chefdk-push:
 .PHONY: sshd-build sshd-push
 sshd-build:
 	docker build -t devchef/sshd:centos -f sshd/Dockerfile.centos sshd
-	docker build -t devchef/sshd:ubuntu -f sshd/Dockerfile.ubuntu sshd
+	docker build -t devchef/sshd:ubuntu -t devchef/sshd:ubuntu-14.04 -f sshd/Dockerfile.ubuntu-14.04 sshd
+	docker build -t devchef/sshd:ubuntu-12.04 -f sshd/Dockerfile.ubuntu-12.04 sshd
 
 sshd-push:
 	docker push devchef/sshd
