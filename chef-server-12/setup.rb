@@ -1,10 +1,13 @@
+config_content = []
+config_content << "topology 'standalone'"
+config_content << "api_fqdn '#{ENV['CHEF_FQDN']}'"
+config_content << "nginx['server_name'] = '#{ENV['CHEF_FQDN']}'"
+config_content << "nginx['dhparam_key_length'] = 1024"
+config_content << "data_collector['root_url'] = '#{ENV['CHEF_DATA_COLLECTOR_URL']}'" unless ENV['CHEF_DATA_COLLECTOR_URL'].nil?
+config_content << "data_collector['token'] = '#{ENV['CHEF_DATA_COLLECTOR_TOKEN']}'" unless ENV['CHEF_DATA_COLLECTOR_TOKEN'].nil?
+
 file '/etc/opscode/chef-server.rb' do
-  content <<-EOH
-topology 'standalone'
-api_fqdn '#{ENV['CHEF_FQDN']}'
-nginx['server_name'] = '#{ENV['CHEF_FQDN']}'
-nginx['dhparam_key_length'] = 1024
-  EOH
+  content config_content.join("\n")
 end
 
 execute 'chef-server-ctl reconfigure'
