@@ -51,10 +51,11 @@ chefdk-push:
 .PHONY: sshd-build sshd-push
 sshd-build:
 	docker build -t devchef/sshd:centos -f sshd/Dockerfile.centos sshd
-	docker build -t devchef/sshd:ubuntu -t devchef/sshd:ubuntu-14.04 -f sshd/Dockerfile.ubuntu-14.04 sshd
+	docker build -t devchef/sshd:ubuntu -t devchef/sshd:ubuntu-16.04 -f sshd/Dockerfile.ubuntu-16.04 sshd
+	docker build -t devchef/sshd:ubuntu-14.04 -f sshd/Dockerfile.ubuntu-14.04 sshd
 	docker build -t devchef/sshd:ubuntu-12.04 -f sshd/Dockerfile.ubuntu-12.04 sshd
 	docker build -t devchef/sshd:debian-8 -f sshd/Dockerfile.debian-8-jessie sshd
-       docker build -t devchef/sshd:oraclelinux -f sshd/Dockerfile.oraclelinux sshd
+  docker build -t devchef/sshd:oraclelinux -f sshd/Dockerfile.oraclelinux sshd
 
 sshd-push:
 	docker push devchef/sshd
