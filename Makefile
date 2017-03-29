@@ -1,7 +1,7 @@
 .PHONY: all build-all push-all
 all: build-all push-all
-build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build
-push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push
+build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build automate-workflow-api-base-build
+push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push automate-workflow-api-base-push
 
 .PHONY: erlang-18-build erlang-18-push
 erlang-18-build:
@@ -59,3 +59,10 @@ sshd-build:
 
 sshd-push:
 	docker push devchef/sshd
+
+.PHONY: automate-workflow-api-base-push automate-workflow-api-base-build
+automate-workflow-api-base-build:
+	docker build -t devchef/automate-workflow-api-base:latest -f automate-workflow-api-base/Dockerfile automate-workflow-api-base
+
+automate-workflow-api-base-push:
+	docker push devchef/automate-workflow-api-base
