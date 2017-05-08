@@ -12,5 +12,4 @@ RUN apt-get install -y elixir
 RUN mix local.hex --force && \
       mix local.rebar --force
 
-WORKDIR /usr/src/app
-
+# Elixir imports and WORKDIR/APPDIR from the erlang base image.
