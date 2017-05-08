@@ -1,7 +1,7 @@
 .PHONY: all build-all push-all
 all: build-all push-all
-build-all: erlang-18-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build automate-workflow-api-base-build
-push-all: erlang-18-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push automate-workflow-api-base-push
+build-all: erlang-18-build elixir-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build automate-workflow-api-base-build
+push-all: erlang-18-push elixir-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push automate-workflow-api-base-push
 
 .PHONY: erlang-18-build erlang-18-push
 erlang-18-build:
@@ -9,6 +9,13 @@ erlang-18-build:
 
 erlang-18-push:
 	docker push devchef/erlang-18
+
+.PHONY: elixir-build elixir-push
+elixir-build:
+	docker build -t devchef/elixir:latest -f elixir/Dockerfile elixir
+
+elixir-push:
+	docker push devchef/elixir
 
 .PHONY: postgres-9.5-build postgres-9.5-push
 postgres-9.5-build:
@@ -55,7 +62,7 @@ sshd-build:
 	docker build -t devchef/sshd:ubuntu-14.04 -f sshd/Dockerfile.ubuntu-14.04 sshd
 	docker build -t devchef/sshd:ubuntu-12.04 -f sshd/Dockerfile.ubuntu-12.04 sshd
 	docker build -t devchef/sshd:debian-8 -f sshd/Dockerfile.debian-8-jessie sshd
-  docker build -t devchef/sshd:oraclelinux -f sshd/Dockerfile.oraclelinux sshd
+	docker build -t devchef/sshd:oraclelinux -f sshd/Dockerfile.oraclelinux sshd
 
 sshd-push:
 	docker push devchef/sshd
