@@ -1,7 +1,7 @@
 .PHONY: all build-all push-all
 all: build-all push-all
-build-all: erlang-18-build elixir-build node-5.6-build postgres-9.5-build sqitch-build chef-server-12-build chefdk-build sshd-build automate-workflow-api-base-build
-push-all: erlang-18-push elixir-push node-5.6-push postgres-9.5-push sqitch-push chef-server-12-push chefdk-push sshd-push automate-workflow-api-base-push
+build-all: erlang-18-build elixir-build node-5.6-build postgres-9.5-build postgres-9.3-build sqitch-build chef-server-12-build chefdk-build sshd-build automate-workflow-api-base-build
+push-all: erlang-18-push elixir-push node-5.6-push postgres-9.5-push postgres-9.3-push sqitch-push chef-server-12-push chefdk-push sshd-push automate-workflow-api-base-push
 
 .PHONY: erlang-18-build erlang-18-push
 erlang-18-build:
@@ -24,6 +24,14 @@ postgres-9.5-build:
 
 postgres-9.5-push:
 	docker push devchef/postgres-9.5
+
+.PHONY: postgres-9.3-build postgres-9.3-push
+postgres-9.3-build:
+	docker build -t devchef/postgres-9.3:latest -f postgres-9.3/Dockerfile postgres-9.3
+	docker build -t devchef/postgres-9.3:pgtap -f postgres-9.3/Dockerfile-pgtap postgres-9.3
+
+postgres-9.3-push:
+	docker push devchef/postgres-9.3
 
 .PHONY: sqitch-build sqitch-push
 sqitch-build:
